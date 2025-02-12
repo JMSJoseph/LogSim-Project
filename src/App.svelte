@@ -1,7 +1,5 @@
 <script lang="ts">
-    import svelteLogo from './assets/svelte.svg'
-    import viteLogo from '/vite.svg'
-    import { asDraggable } from 'svelte-drag-and-drop-actions'
+    import Circuit from './lib/Circuit.svelte'
 
     // this should be made reusable for circuits of different sizes
     // 1/2 of the screen - Half of the dragable item length = perfect center
@@ -29,7 +27,8 @@
 </script>
 
 <main>
-    <div>
+    <Circuit />
+    <!-- <div>
         <a href="https://vite.dev" target="_blank" rel="noreferrer">
             <img src={viteLogo} class="logo" alt="Vite Logo" />
         </a>
@@ -39,40 +38,6 @@
     </div>
 
     <!-- Dragable Box. It should be its own componenet -->
-    <div
-        style="
-    display:block; position:absolute;
-    left:{DraggableX}px; top:{DraggableY}px; width:{DraggableWidth}px; height:{DraggableHeight}px;
-    background:forestgreen; color:white; line-height:30px; text-align:center; cursor:move;
-  "
-        use:asDraggable={{
-            minX: 0,
-            minY: 0,
-            maxX: ArenaWidth - DraggableWidth,
-            maxY: ArenaHeight - DraggableHeight,
-            onDragStart: { x: DraggableX, y: DraggableY },
-            onDragMove,
-            onDragEnd,
-        }}
-    >
-        <img
-            src={andGate}
-            width="400px"
-            style="cursor:crosshair; border: 10px solid red;"
-            alt="and gate"
-        />
-    </div>
-    <h1>Logic Web App, "Walking Example"</h1>
-
-    <img
-        width="300px"
-        src={cutePumpkinCat}
-        alt="random pixelated cat in a pumpkin"
-    />
-
-    <p class="read-the-docs">
-        Click on the Vite and Svelte logos to learn more
-    </p>
 </main>
 
 <style>
