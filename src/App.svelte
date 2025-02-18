@@ -1,94 +1,143 @@
-<script lang="ts">
-    import svelteLogo from './assets/svelte.svg'
-    import viteLogo from '/vite.svg'
-    import { asDraggable } from 'svelte-drag-and-drop-actions'
+<script>
+  import svelteLogo from './assets/svelte.svg'
+  import viteLogo from '/vite.svg'
+  import Counter from './lib/Counter.svelte'
 
-    // this should be made reusable for circuits of different sizes
-    // 1/2 of the screen - Half of the dragable item length = perfect center
-    let DraggableX = window.innerWidth / 2 - 400 / 2,
-        DraggableY = window.innerHeight / 4 - 188 / 2,
-        DraggableWidth = 400,
-        DraggableHeight = 188
+	let show = true;
+  
+	function toggleItem(n){
+		let item = document.getElementById("menu_cat_"+n);
+		if(item.style.display !== "block"){
+			item.style.display = "block";
+		} else {
+			item.style.display = "none";
+  	}
 
-    let ArenaWidth = window.innerWidth,
-        ArenaHeight = window.innerHeight
+	}
 
-    function onDragMove(x: number, y: number, dx: number, dy: number) {
-        DraggableX = x
-        DraggableY = y
-    }
-    function onDragEnd(x: number, y: number, dx: number, dy: number) {
-        DraggableX = x
-        DraggableY = y
-    }
+  const gates = [
+		["NOT Gate", 	()=>console.log("NOT Gate")],
+		["Buffer", 		()=>console.log("Buffer")],
+		["AND", 			()=>console.log("AND Gate")],
+		["OR Gate",  	()=>console.log("OR Gate")],
+		["NAND Gate", ()=>console.log("NAND Gate")],
+		["NOR Gate", 	()=>console.log("NOR Gate")],
+		["XOR Gate", 	()=>console.log("XOR Gate")],
+		["NXOR Gate", ()=>console.log("NXOR Gate")],
+		// Optional
+		["Odd Parity", ()=>console.log("Odd Parity")],
+		["Even Parity", ()=>console.log("Even Parity")],
+		["Controlled Buffer", ()=>console.log("Controlled Buffer")],
+		["Controlled Inverter", ()=>console.log("Controlled Inverter")]
+		]; 
 
-    let andGate: string =
-        'https://media.geeksforgeeks.org/wp-content/uploads/20220607100724/andgate.jpg'
-    let cutePumpkinCat: string =
-        'https://i.redd.it/i-got-bored-so-i-decided-to-draw-a-random-image-on-the-v0-4ig97vv85vjb1.png?width=1280&format=png&auto=webp&s=7177756d1f393b6e093596d06e1ba539f723264b'
+	
+
 </script>
 
 <main>
-    <div>
-        <a href="https://vite.dev" target="_blank" rel="noreferrer">
-            <img src={viteLogo} class="logo" alt="Vite Logo" />
-        </a>
-        <a href="https://svelte.dev" target="_blank" rel="noreferrer">
-            <img src={svelteLogo} class="logo svelte" alt="Svelte Logo" />
-        </a>
-    </div>
+  <div 
+		id = "main_menu" 
+		class = "main_menu" 
+		style = {show ? "left: 0%": "left: -20%"}
+		>
+		 
+		{#snippet menuItem(itemName, itemLinkingFunction)}
+			<div 
+				class = "menu_item"
+				>
+				<!-- Image Files should be named acouring to this format ./src/assets/itemName.png-->
+				
+				<button 
+					class = "menu_item_button"
+					onclick = {()=>itemLinkingFunction()}
+					>
+					<img 
+					src={"./src/assets/Place Holder.png"} 
+					alt = {itemName + " Circut Pictogram"}
+					class = "menu_item_image"
+					/>
+					{itemName}
+				</button>
+			</div>
+		{/snippet}
 
-    <!-- Dragable Box. It should be its own componenet -->
-    <div
-        style="
-    display:block; position:absolute;
-    left:{DraggableX}px; top:{DraggableY}px; width:{DraggableWidth}px; height:{DraggableHeight}px;
-    background:forestgreen; color:white; line-height:30px; text-align:center; cursor:move;
-  "
-        use:asDraggable={{
-            minX: 0,
-            minY: 0,
-            maxX: ArenaWidth - DraggableWidth,
-            maxY: ArenaHeight - DraggableHeight,
-            onDragStart: { x: DraggableX, y: DraggableY },
-            onDragMove,
-            onDragEnd,
-        }}
-    >
-        <img
-            src={andGate}
-            width="400px"
-            style="cursor:crosshair; border: 10px solid red;"
-            alt="and gate"
-        />
-    </div>
-    <h1>Logic Web App, "Walking Example"</h1>
+		<!-- items is expected to be a 2d array with the inner array of this format
+			{itemName, itemLinkingFunction} 
+			labels must be unique per cat
+		-->
+		{#snippet menuCat(label, items)}
+			<button 
+				onclick={()=>{toggleItem(label)}}
+				class = "menu_cat_button"
+				> 
+				{label}
+			</button>
+			
+			<div 
+				id = {"menu_cat_"+label}
+				class = "menu_cat" 
+				>
+				{#each items as item}
+					{@render menuItem(item[0], item[1])}
+				{/each}
+			</div>
+			<br>
+		{/snippet}
+		
+		
+		{@render menuCat("Basic", gates)}
+		
+		{@render menuCat("Basic2", gates)}
 
-    <img
-        width="300px"
-        src={cutePumpkinCat}
-        alt="random pixelated cat in a pumpkin"
-    />
+		
+		
+	
+	</div>
+		
+  <button onclick={()=>{show=!show}} >collapse menu</button>
 
-    <p class="read-the-docs">
-        Click on the Vite and Svelte logos to learn more
-    </p>
+
+
 </main>
 
 <style>
-    .logo {
-        height: 6em;
-        padding: 1.5em;
-        will-change: filter;
-        transition: filter 300ms;
-    }
-    .logo:hover {
-        filter: drop-shadow(0 0 2em #646cffaa);
-    }
-    .logo.svelte:hover {
-        filter: drop-shadow(0 0 2em #ff3e00aa);
-    }
-    .read-the-docs {
-        color: #888;
-    }
+	.main_menu{
+		height: 400%;
+		width: 20%;
+		background-color:cornflowerblue;
+		position: absolute;
+    left: 0;
+    top: 0;
+    transition: left 0.3s ease; /* Smooth transition */
+		text-align: left;
+	}
+	.menu_cat{
+		text-indent: 50px;
+		display: none;
+
+
+	}
+	.menu_item {
+		
+		
+	}
+	.menu_item_image {
+		max-width: 40%; /** consider other bounds*/
+		max-height: 25px;
+		display: inline;
+	}
+	.menu_item_button {
+		align-items: left;
+		min-width: 60%;
+		text-align: left;
+		display: inline-block;
+  	vertical-align: middle;
+		
+	}
+
+	.menu_item_button, .menu_cat_button{
+
+	}
+
 </style>
