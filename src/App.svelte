@@ -1,6 +1,5 @@
 <script lang="ts">
-    import svelteLogo from './assets/svelte.svg'
-    import viteLogo from '/vite.svg'
+    import SideBar from './components/SideBar.svelte';
     import { asDraggable } from 'svelte-drag-and-drop-actions'
 
     // this should be made reusable for circuits of different sizes
@@ -24,20 +23,11 @@
 
     let andGate: string =
         'https://media.geeksforgeeks.org/wp-content/uploads/20220607100724/andgate.jpg'
-    let cutePumpkinCat: string =
-        'https://i.redd.it/i-got-bored-so-i-decided-to-draw-a-random-image-on-the-v0-4ig97vv85vjb1.png?width=1280&format=png&auto=webp&s=7177756d1f393b6e093596d06e1ba539f723264b'
 </script>
 
-<main>
-    <div>
-        <a href="https://vite.dev" target="_blank" rel="noreferrer">
-            <img src={viteLogo} class="logo" alt="Vite Logo" />
-        </a>
-        <a href="https://svelte.dev" target="_blank" rel="noreferrer">
-            <img src={svelteLogo} class="logo svelte" alt="Svelte Logo" />
-        </a>
-    </div>
+<SideBar />
 
+<main>
     <!-- Dragable Box. It should be its own componenet -->
     <div
         style="
@@ -58,37 +48,12 @@
         <img
             src={andGate}
             width="400px"
-            style="cursor:crosshair; border: 10px solid red;"
+            style="cursor:crosshair"
             alt="and gate"
         />
     </div>
-    <h1>Logic Web App, "Walking Example"</h1>
-
-    <img
-        width="300px"
-        src={cutePumpkinCat}
-        alt="random pixelated cat in a pumpkin"
-    />
-
-    <p class="read-the-docs">
-        Click on the Vite and Svelte logos to learn more
-    </p>
 </main>
 
 <style>
-    .logo {
-        height: 6em;
-        padding: 1.5em;
-        will-change: filter;
-        transition: filter 300ms;
-    }
-    .logo:hover {
-        filter: drop-shadow(0 0 2em #646cffaa);
-    }
-    .logo.svelte:hover {
-        filter: drop-shadow(0 0 2em #ff3e00aa);
-    }
-    .read-the-docs {
-        color: #888;
-    }
+    
 </style>
