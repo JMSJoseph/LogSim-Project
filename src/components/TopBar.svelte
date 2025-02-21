@@ -1,3 +1,20 @@
+<script lang="ts">
+    import { onMount } from 'svelte';
+    
+    let imageUrl = '';
+    onMount(() => {
+        const handleFileClicked = (event: CustomEvent<{ file: { image: string } }>) => {
+            imageUrl = event.detail.file.image;
+        };
+
+        window.addEventListener('file-clicked', handleFileClicked as EventListener);
+
+        return () => {
+            window.removeEventListener('file-clicked', handleFileClicked as EventListener);
+        };
+    });
+</script>
+
 <style>
     .topbar {
         position: fixed; 
@@ -9,8 +26,7 @@
         border-bottom : 1px solid black;
     }
 
-    .topbar p {
-        margin-left: 1rem;
+    .topbar button {
         color: black;
     }
 
@@ -18,9 +34,14 @@
 
 <main>
     <div class="topbar">
-        <p>File</p>
-        <p>Edit</p>
-        <p>Save</p>
-        <p>Recent</p>
+        <button>File</button>
+        <button>Edit</button>
+        <button>Run</button>
+        <button>Save</button>
+        <button>Recent</button>
+        {#if imageUrl}
+            <img src={imageUrl} alt="File icon" />
+        {/if}
     </div>
 </main>
+

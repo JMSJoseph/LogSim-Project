@@ -1,4 +1,5 @@
 <script lang="ts">
+  import { createEventDispatcher } from 'svelte';
   
   type Folder = {
     name: string;
@@ -33,6 +34,12 @@
       return folder;
     });
   }
+
+  const dispatch = createEventDispatcher();
+
+  function fileClicked(file: {name: string; image: string;}) {
+    dispatch('file-clicked', { file });
+  }
 </script>
 
 <style>
@@ -46,7 +53,7 @@
       border-right: black 1px solid;
     }
   
-    .sidebar a, .folder button  {
+    .folder button  {
       padding: 15px 20px;
       text-decoration: none;
       font-size: 18px;
@@ -54,14 +61,13 @@
       display: block;
     }
   
-    .sidebar a:hover, .folder button:hover {
+    .folder button:hover {
       background-color: #575757;
     }
 
     .folder-content {
     padding-left: 20px;
   }
-
     .file-item {
     display: flex;
     align-items: center;
@@ -71,11 +77,9 @@
     height: 45px;
     margin-right: 2px;
   }
-
-  .file-item a {
+  .file-item span {
     font-size: 13px;
   }
-
   </style>
   
   <div class="sidebar">
@@ -85,10 +89,10 @@
       {#if folder.expanded}
         <div class="folder-content">
           {#each folder.files as file}
-          <div class="file-item">
+          <button class="file-item" on:click={() => fileClicked(file)} aria-label={'Open ${file.name'}>
             <img src={file.image} alt="File icon">
-            <a href="hi">{file.name}</a>
-          </div>
+            <span>{file.name}</span>
+          </button>
           {/each}
         </div>
       {/if}
