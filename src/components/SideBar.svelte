@@ -1,24 +1,26 @@
 <script lang="ts">
+  
   type Folder = {
     name: string;
-    files: string[];
+    files: {name: string; image: string;}[];
     expanded: boolean;
   };
 
   let folders: Folder[] = [
     {
-      name: 'Folder 1',
-      files: [ 'File 1', 'File 2'],
+      name: 'Wiring',
+      files: [
+      { name: 'File 1', image: 'path/to/image1.png' },
+      { name: 'File 2', image: 'path/to/image2.png' },
+    ],
       expanded: false
     },
     {
-      name: 'Folder 2',
-      files: [ 'File 1', 'File 2'],
-      expanded: false
-    },
-    {
-      name: 'Folder 3',
-      files: [ 'File 1', 'File 2'],
+      name: 'Gates',
+      files: [
+      { name: 'AND Gate', image: 'https://media.geeksforgeeks.org/wp-content/uploads/20220607100724/andgate.jpg' },
+      { name: 'OR Gate', image: 'path/to/image2.png' },
+    ],
       expanded: false
     },
   ];
@@ -37,7 +39,7 @@
     .sidebar {
       height: 100%;
       position: fixed;
-      top: 0;
+      top: 3.15rem;
       left: 0;
       background-color: white;
       padding-top: 20px;
@@ -59,6 +61,21 @@
     .folder-content {
     padding-left: 20px;
   }
+
+    .file-item {
+    display: flex;
+    align-items: center;
+  }
+    .file-item img {
+    width: 45px;
+    height: 45px;
+    margin-right: 2px;
+  }
+
+  .file-item a {
+    font-size: 13px;
+  }
+
   </style>
   
   <div class="sidebar">
@@ -68,7 +85,10 @@
       {#if folder.expanded}
         <div class="folder-content">
           {#each folder.files as file}
-            <a href="hi">{file}</a>
+          <div class="file-item">
+            <img src={file.image} alt="File icon">
+            <a href="hi">{file.name}</a>
+          </div>
           {/each}
         </div>
       {/if}
