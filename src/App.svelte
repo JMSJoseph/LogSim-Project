@@ -30,6 +30,61 @@
 		["Controlled Buffer", ()=>console.log("Controlled Buffer")],
 		["Controlled Inverter", ()=>console.log("Controlled Inverter")]
 		]; 
+  const wiring = [
+		["Splitter", ()=>console.log("Splitter")],
+		["Pin", ()=>console.log("Pin")],
+		["Probe", ()=>console.log("Probe")],
+		["Tunnel", ()=>console.log("Tunnel")],
+		];
+  const plexers  = [
+		["Multiplexer", ()=>console.log("Multiplexer")],
+		["Demultiplexer", ()=>console.log("Demultiplexer")],
+		["Decoder", ()=>console.log("Decoder")],
+		["Priority Encoder", ()=>console.log("Priority Encoder")],
+		["Bit Selector", ()=>console.log("Bit Selector")],
+		];
+  const arithmetic = [
+		["Adder", ()=>console.log("Adder")],
+		["Subtractor", ()=>console.log("Subtractor")],
+		["Multiplier", ()=>console.log("Multiplier")],
+		["Divider", ()=>console.log("Divider")],
+		["Negator", ()=>console.log("Negator")],
+		["Comparator", ()=>console.log("Comparator")],
+		["Shifter", ()=>console.log("Shifter")],
+		["Bit Adder", ()=>console.log("Bit Adder")],
+		["Bit Finder", ()=>console.log("Bit Finder")],
+		];
+  const memory = [
+		["D Flip-Flop", ()=>console.log("D Flip-Flop")],
+		["T Flip-Flop", ()=>console.log("T Flip-Flop")],
+		["J-K Flip-Flop", ()=>console.log("J-K Flip-Flop")],
+		["Register", ()=>console.log("Register")],
+		["Counter", ()=>console.log("Counter")],
+		["Comparator", ()=>console.log("Comparator")],
+		["Shift Register", ()=>console.log("Shift Register")],
+		["Random Generator", ()=>console.log("Random Generator")],
+		["RAM", ()=>console.log("RAM")],
+		["ROM", ()=>console.log("ROM")],
+  		];
+  const io = [
+		["Button", ()=>console.log("Button")],
+		["Joystick", ()=>console.log("Joystick")],
+		["Keyboard", ()=>console.log("Keyboard")],
+		["7-Segment Display", ()=>console.log("7-Segment Display")],
+		["Hex Digit Display", ()=>console.log("Hex Digit Display")],
+		["Led Matrix", ()=>console.log("Led Matrix")],
+		["TTY", ()=>console.log("TTY")],
+  		];
+  const base = [
+		["Poke Tool", ()=>console.log("Poke Tool")],
+		["Edit Tool", ()=>console.log("Edit Tool")],
+		["Select Tool", ()=>console.log("Select Tool")],
+		["Wiring Tool", ()=>console.log("Wiring Tool")],
+		["Text Tool", ()=>console.log("Text Tool")],
+		["Menu Tool", ()=>console.log("Menu Tool")],
+		["Label", ()=>console.log("Label")],
+  		];	
+  
 
 	
 
@@ -84,11 +139,20 @@
 			</div>
 			<br>
 		{/snippet}
+
+		{@render menuCat("Wiring", wiring)}
 		
+		{@render menuCat("Gates", gates)}
+
+		{@render menuCat("Plexers", plexers)}
+
+		{@render menuCat("Arithmetic", arithmetic)}
+
+		{@render menuCat("Memory", memory)}
+
+		{@render menuCat("Input/Output", io)}
 		
-		{@render menuCat("Basic", gates)}
-		
-		{@render menuCat("Basic2", gates)}
+		{@render menuCat("Base", base)}
 
 		
 		
