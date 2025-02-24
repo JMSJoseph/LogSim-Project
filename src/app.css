@@ -1,3 +1,52 @@
+:root[svelvet-theme='LogiCap'] {
+    --node-color: hsl(225, 30%, 50%);
+    --node-border-color: hsl(225, 20%, 40%);
+    --node-selection-color: hsl(45, 90%, 60%);
+    --text-color: hsl(0, 0%, 100%);
+
+    --background-color: white;
+    --dot-color: black;
+
+    --accent-color: hsl(45, 90%, 60%);
+    --primary-color: hsl(225, 30%, 66%);
+
+    --edge-color: black;
+    --target-edge-color: hsl(225, 20%, 40%);
+
+    --anchor-color: hsl(45, 90%, 67%);
+    --anchor-border-color: hsl(45, 90%, 87%);
+    --anchor-connected: hsl(45, 90%, 100%);
+    --anchor-connected-border: hsl(225, 20%, 20%);
+
+    --anchor-connecting: hsl(225, 30%, 40%);
+    --anchor-connecting-border: hsl(0, 0%, 100%);
+
+    --anchor-hovering: hsl(225, 20%, 46%);
+    --anchor-hovering-border: hsl(0, 0%, 0%);
+
+    --minimap-background-color: hsl(225, 20%, 27%);
+
+    --minimap-node-color: hsl(225, 30%, 20%);
+
+    --controls-background-color: hsl(225, 20%, 27%);
+    --controls-text-color: hsl(0, 0%, 100%);
+
+    --theme-toggle-text-color: hsl(0, 0%, 100%);
+    --theme-toggle-color: hsl(225, 20%, 27%);
+
+    .svelvet-wrapper {
+        border-radius: 38px;
+        outline: 10px solid rgb(100, 100, 100);
+    }
+
+    .svelvet-wrapper:focus-visible {
+        border-radius: 38px;
+        outline: 10px solid black;
+    }
+
+} 
+
+
 :root {
     font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
     line-height: 1.5;
@@ -13,57 +62,88 @@
     -moz-osx-font-smoothing: grayscale;
 }
 
+
+*
+*, *::before, *::after {
+    /* changes how the width and height of elements are calculated to include padding and border within the total height */
+    box-sizing: border-box;
+}
+
+* {
+    /*  Enhances the readability of text on the page by optimizing the kerning (space between letters)  */
+    margin: 0;
+    padding: 0;
+    /* font: inherit; */
+
+    /* make the font look nice */
+    text-rendering: optimizeLegibility;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: greyscale;
+    font-kerning: auto;
+}
+
+
+html {
+    font-family sans-serif;
+    color-scheme: dark light;
+   /* By using `100%` for this property, it prevents mobile browsers from automatically resizing font sizes, maintaining consistency across different devices. */
+    -webkit-text-size-adjust: 100%;
+}
+
+
+/* removes default margin around the body element */
+body {
+    background-color: rgba(255, 240, 220, 1);
+    /* 
+      small viewport height (svh),
+      height of the viewport excluding the mobile default browser address bar.
+      ensure the element always fills the visible portion of the screen,
+    */
+    min-height: 100svh;
+    /* display: flex; */
+    /* overflow: hidden; */
+}
+
+h1, h2, h3, h4, h5, h6 {
+    text-wrap: balance;
+}
+
+/* We wont have too many paragraphs in this project */
+p {
+    /* The 'ch' unit represents the width of the '0' character as rendered in the document's current font.
+     * It is useful for defining lengths in typography as it scales with font size and style. */
+    max-width: 75ch;
+    /* prevents typography orphans */
+    text-wrap: pretty;
+}
+
+/* 
+This CSS rule applies to img, picture, svg, and video elements. 
+- display: block; makes these elements behave like block-level elements, which means they start on a new line and take up the full width available.
+- max-width: 100%; ensures that these elements do not exceed the width of their container, helping to maintain responsive design by scaling down the element in smaller viewports.
+*/
+img, picture, svg, video {
+    display: block;
+    max-width: 100%;
+}
+
 a {
     font-weight: 500;
     color: #646cff;
     text-decoration: inherit;
 }
+
 a:hover {
     color: #535bf2;
 }
 
-body {
-    margin: 0;
-    display: flex;
-    place-items: center;
-    min-width: 320px;
-    min-height: 100vh;
-}
 
 h1 {
     font-size: 3.2em;
     line-height: 1.1;
-}
-
-.card {
-    padding: 2em;
-}
-
-#app {
-    max-width: 1280px;
-    margin: 0 auto;
-    padding: 2rem;
     text-align: center;
 }
 
-button {
-    border-radius: 8px;
-    border: 1px solid transparent;
-    padding: 0.6em 1.2em;
-    font-size: 1em;
-    font-weight: 500;
-    font-family: inherit;
-    background-color: #1a1a1a;
-    cursor: pointer;
-    transition: border-color 0.25s;
-}
-button:hover {
-    border-color: #646cff;
-}
-button:focus,
-button:focus-visible {
-    outline: 4px auto -webkit-focus-ring-color;
-}
 
 @media (prefers-color-scheme: light) {
     :root {
@@ -73,7 +153,12 @@ button:focus-visible {
     a:hover {
         color: #747bff;
     }
-    button {
-        background-color: #f9f9f9;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+    :has(:target) {
+        scroll-behavior: smooth; /* Enables smooth scrolling when the user has not specified a preference for reduced motion in their system settings */
+        /* Padding for navigation to Links that include a element ID ex href="/page/#title0" */
+        scroll-padding-top: 3rem;
     }
 }
