@@ -1,6 +1,4 @@
 <script lang="ts">
-    import SideBar from './components/SideBar.svelte';
-    import TopBar from './components/TopBar.svelte';
     import { asDraggable } from 'svelte-drag-and-drop-actions'
 
     // this should be made reusable for circuits of different sizes
