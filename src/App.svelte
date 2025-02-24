@@ -9,7 +9,13 @@
     const blackColor: Readable<CSSColorString> = readable('red')
 </script>
 
-<div id="AppBar"></div>
+<div id="AppBar">
+    <button>File</button>
+        <button>Edit</button>
+        <button>Run</button>
+        <button>Save</button>
+        <button>Recent</button>
+</div>
 <div id=""></div>
 <main>
     <div class="side_menu"></div>
@@ -71,6 +77,20 @@
         width: 100%;
         background-color: cornflowerblue;
     }
+
+    #AppBar button {
+        flex: 1;
+        background-color: cornflowerblue;
+        border: none;
+        color: white;
+        padding: 14px 20px;
+        text-align: center;
+        text-decoration: none;
+        display: inline-block;
+        font-size: 20px;
+        cursor: pointer;
+    }
+    
     #svelvet_canvas {
         height: calc(100% - 5vh);
         /* width: max-content; */
