@@ -2,6 +2,7 @@
     import { Svelvet, Minimap, Controls } from 'svelvet'
     import AndGate from './lib/AndGate.svelte'
     import { circuitStore } from './lib/stores/circuitStore'
+    import { HeadlessCircuit } from 'digitaljs'
 
     // import type { CSSColorString } from 'svelvet'
     // import { readable, type Readable } from 'svelte/store'
@@ -17,8 +18,11 @@
 
     // $inspect(lastLinked_0).with(console.log)
     // $inspect(lastLinked_1).with(console.log)
+    let currentCircuit
     circuitStore.subscribe((value) => {
-        console.log(value.connectors)
+        // console.log(value.connectors)
+        currentCircuit = new HeadlessCircuit(value)
+        console.log(currentCircuit.toJSON())
     })
 </script>
 
@@ -29,6 +33,7 @@
     <Svelvet theme="LogiCap" TD controls edgeStyle="step" editable={false}>
         <Minimap width={100} corner="NE" slot="minimap" />
         <AndGate nodeStartPos={20} width={80} height={50} />
+        <AndGate nodeStartPos={200} width={80} height={50} />
         <AndGate nodeStartPos={200} width={80} height={50} />
     </Svelvet>
 </main>
