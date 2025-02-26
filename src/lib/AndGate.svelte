@@ -37,8 +37,9 @@
     // console.log(storedValue)
     // const store = readable(storedValue ? JSON.parse(storedValue) : initialValue)
     const newDevice: Device = {
-        type: 'And',
+        celltype: '$and',
         label: nodeId,
+        bits: 0,
     }
     // Update the store when this circuit is generated.
     circuitStore.update((currentCircuit) => {

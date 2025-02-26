@@ -3,8 +3,9 @@ import { writable } from 'svelte/store'
 // Explains the json representation
 // https://github.com/tilk/digitaljs
 export type Device = {
-    type: string
+    celltype: string
     label: string
+    bits?: number
 }
 
 export type LinkData = {

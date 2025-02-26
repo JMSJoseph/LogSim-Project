@@ -1,8 +1,8 @@
 <script lang="ts">
     import { Svelvet, Minimap, Controls } from 'svelvet'
     import AndGate from './lib/AndGate.svelte'
-    import { circuitStore } from './lib/stores/circuitStore'
-    import { HeadlessCircuit } from 'digitaljs'
+    import { circuitStore, type Circuit } from './lib/stores/circuitStore'
+    import { HeadlessCircuit } from 'custom_digitalJS'
 
     // import type { CSSColorString } from 'svelvet'
     // import { readable, type Readable } from 'svelte/store'
@@ -18,11 +18,20 @@
 
     // $inspect(lastLinked_0).with(console.log)
     // $inspect(lastLinked_1).with(console.log)
-    let currentCircuit
-    circuitStore.subscribe((value) => {
+    let testJson = {
+        devices: {
+            And_864: { celltype: '$and', label: 'And_864', bits: 40 },
+            And_865: { celltype: '$and', label: 'And_865', bits: 0 },
+            And_866: { celltype: '$and', label: 'And_866', bits: 0 },
+        },
+        connectors: [],
+        subcircuits: {},
+    }
+    let currentCircuit = new HeadlessCircuit(testJson)
+    console.log(JSON.stringify(currentCircuit))
+    circuitStore.subscribe((value: Circuit) => {
         // console.log(value.connectors)
-        currentCircuit = new HeadlessCircuit(value)
-        console.log(currentCircuit.toJSON())
+        console.log(JSON.stringify(value))
     })
 </script>
 
