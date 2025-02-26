@@ -6,20 +6,13 @@ export default defineConfig({
   plugins: [svelte()],
   base: './', // Use relative paths
   optimizeDeps: {
-    include: ['custom_digitalJS'],
+    include: ['custom_digitaljs'],
   },
   build: {
     rollupOptions: {
       external: ['jquery', 'jquery-ui'],
-      output: {
-        globals: {
-          'jquery': 'jQuery'
-        }
-      }
-
     },
     commonjsOptions: {
-      include: [/custom_digitalJS/, /node_modules/],
       transformMixedEsModules: true
     },
   }

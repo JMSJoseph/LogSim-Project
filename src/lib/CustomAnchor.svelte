@@ -44,26 +44,45 @@
     // ASSUMPTION: Input can only ever have 1 thing connected to it, but an output can be outputting to multiple inputs
     // I will NOT make this assumption in the handling of unlinking below; but this change is maybe needed.
     // using derived here would be great if that worked. $derived.by()
-    $effect(() => {
-        if (linked && (io === 'input' || io === 'output')) {
-            const triggeredAnchor = createConnectionJson(nodeId, portName)
-            return handleLinkAnchorConnection(triggeredAnchor)
-        } else if (!linked) {
-            // console.log(io)
-            const triggeredAnchor = createConnectionJson(nodeId, portName)
-            return handleUnlinkAnchorConnection(triggeredAnchor)
-        }
-    })
+    let startedLink = false
+    // $effect(() => {
+    //     if (linked && (io === 'input' || io === 'output')) {
+    //         const triggeredAnchor = createConnectionJson(nodeId, portName)
+    //         handleLinkAnchorConnection(triggeredAnchor)
+    //     } else if (!linked && io == 'output') {
+    //         const triggeredAnchor = createConnectionJson(nodeId, portName)
+    //         handleUnlinkAnchorConnection(triggeredAnchor)
+    //     }
+    // })
 
     // TODO, may need to listen to onUnmount
     // I think on disconnect has a default event from svelvet, try that out also this effect may set state to false many times, but honestly nah.
 </script>
 
+<!-- svelte-ignore a11y_click_events_have_key_events -->
 <div
     class="custom_anchor {io === 'input' ? 'input' : 'output'}"
+    role="button"
+    tabindex="0"
     class:linked
     class:hovering
     class:connecting
+    onmousedown={(e) => {
+        const triggeredAnchor = createConnectionJson(nodeId, portName)
+        if (!linked) {
+            handleLinkAnchorConnection(triggeredAnchor)
+        } else if (linked) {
+            handleUnlinkAnchorConnection(triggeredAnchor)
+        }
+    }}
+    onmouseup={(e) => {
+        const triggeredAnchor = createConnectionJson(nodeId, portName)
+        if (!linked) {
+            handleLinkAnchorConnection(triggeredAnchor)
+        } else if (linked) {
+            handleUnlinkAnchorConnection(triggeredAnchor)
+        }
+    }}
 ></div>
 
 <style>

@@ -43,6 +43,7 @@ const initialCircuit: Circuit = {
 }
 
 let pendingConnection: ConnectorPiece | null = null
+// lol 1550 kinda. The first two people are not allowed in the line and then everybody else is allowed.
 
 function createGlobalTimeoutManager() {
     let timeoutId: ReturnType<typeof setTimeout> | null = null
@@ -66,7 +67,6 @@ function createGlobalTimeoutManager() {
     }
 }
 
-const timeoutManager = createGlobalTimeoutManager()
 export let circuitStore = writable<Circuit>(initialCircuit)
 
 // potential problem, if 2 connections are received before timeout ends
@@ -78,7 +78,6 @@ export let circuitStore = writable<Circuit>(initialCircuit)
 function handleAnchorConnection(
     connection: ConnectorPiece,
     updateJsonLinking: (connector: Connector) => void,
-    timeout = 100
 ) {
     // if there are no pending anchor connections to handle
     // either because an input or output timeout before recieving its
@@ -87,18 +86,9 @@ function handleAnchorConnection(
     // problem
     if (pendingConnection === null) {
         pendingConnection = connection
-        timeoutManager.start(() => {
-            pendingConnection = null
-            // Note: the "Skilled Gamer bug" will land the logic here.
-            // Skilled Gamer bug also happens if the edge sticks to your mouse somehow 
-            // Edge always sticks on doubleclick anchor
-            // Edge stick to mouse when you drop it in itself
-            console.warn('Timeout waiting for the second connection')
-        }, timeout)
         // meaning the one that gets false will not update the final store.
         return false
     } else {
-        timeoutManager.cancel()
         // pendingConnection === null, that means there is already a node
         // connection event sent which is now waiting
         if ('from' in connection === 'from' in pendingConnection) {
@@ -117,6 +107,7 @@ function handleAnchorConnection(
         }
         updateJsonLinking(connector)
         pendingConnection = null
+        return true
     }
 }
 
