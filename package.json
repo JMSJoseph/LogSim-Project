@@ -12,6 +12,7 @@
     "devDependencies": {
         "@sveltejs/vite-plugin-svelte": "^5.0.3",
         "@tsconfig/svelte": "^5.0.4",
+        "mkdirp": "^3.0.1",
         "prettier": "^3.4.2",
         "prettier-plugin-svelte": "^3.3.3",
         "svelte": "^5.19.8",
@@ -20,6 +21,8 @@
         "vite": "^6.1.0"
     },
     "dependencies": {
+        "digitaljs": "^0.13.1",
+        "logic-web-app": "file:",
         "svelte-drag-and-drop-actions": "^1.0.2",
         "svelte-drag-drop-touch": "^0.1.9",
         "svelvet": "^11.0.5"

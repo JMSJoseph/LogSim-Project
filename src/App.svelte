@@ -4,7 +4,7 @@
 
     import AndGate from './lib/AndGate.svelte'
 
-    import { circuitStore } from './lib/stores/circuitStore'
+    import { circuitStore } from './lib/stores/circuitStore.ts'
     import SideMenu from './lib/SideMenu/SideMenu.svelte'
     // engines as just to call it with uppercase 'Engines'
 

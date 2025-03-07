@@ -23,7 +23,7 @@
     "prod": "webpack --mode production",
     "watch": "webpack --mode development --watch",
     "test": "jest",
-    "build-lib": "mkdir -p lib && babel src -d lib",
+    "build-lib": "mkdirp lib && babel src -d lib",
     "gh-pages": "webpack --mode production && gh-pages -a -d dist"
   },
   "author": "Marek Materzok",
@@ -50,6 +50,7 @@
     "3vl": "^1.0.1",
     "babel-polyfill": "^6.26.0",
     "dagre": "^0.8.5",
+    "digitaljs": "file:",
     "elkjs": "^0.7.1",
     "fastpriorityqueue": "^0.6.4",
     "graphlib": "^2.1.8",
