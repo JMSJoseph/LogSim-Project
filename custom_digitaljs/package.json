@@ -1,0 +1,87 @@
+{
+  "name": "digitaljs",
+  "version": "0.13.1",
+  "description": "Digital logic simulator",
+  "main": "./lib/circuit.js",
+  "files": [
+    "lib",
+    "dist",
+    "src"
+  ],
+  "browser": "./src/index.mjs",
+  "exports": {
+    "node": {
+      "import": "./src/circuit.mjs",
+      "require": "./lib/circuit.js"
+    },
+    "browser": "./src/index.mjs",
+    "default": "./lib/circuit.js"
+  },
+  "scripts": {
+    "prepare": "npm run prod && npm run build-lib",
+    "dev": "webpack --mode development",
+    "prod": "webpack --mode production",
+    "watch": "webpack --mode development --watch",
+    "test": "jest",
+    "build-lib": "mkdir -p lib && babel src -d lib",
+    "gh-pages": "webpack --mode production && gh-pages -a -d dist"
+  },
+  "author": "Marek Materzok",
+  "license": "BSD-2-Clause",
+  "devDependencies": {
+    "@babel/cli": "^7.15.7",
+    "@babel/core": "^7.15.5",
+    "@babel/preset-env": "^7.15.6",
+    "babel-jest": "^26.6.3",
+    "babel-loader": "^8.2.2",
+    "babel-plugin-add-import-extension": "^1.6.0",
+    "babel-plugin-transform-import-meta": "^2.1.0",
+    "clean-webpack-plugin": "^2.0.2",
+    "css-loader": "^6.3.0",
+    "expose-loader": "^3.0.0",
+    "gh-pages": "^2.2.0",
+    "html-webpack-plugin": "^5.3.2",
+    "jest": "^29.5.0",
+    "style-loader": "^3.3.0",
+    "webpack": "^5.57.1",
+    "webpack-cli": "^4.8.0"
+  },
+  "dependencies": {
+    "3vl": "^1.0.1",
+    "babel-polyfill": "^6.26.0",
+    "dagre": "^0.8.5",
+    "elkjs": "^0.7.1",
+    "fastpriorityqueue": "^0.6.4",
+    "graphlib": "^2.1.8",
+    "jointjs": "^3.4.4",
+    "jquery": "^3.6.0",
+    "jquery-ui": "^1.13.1",
+    "regenerator-runtime": "^0.13.9",
+    "resize-observer-polyfill": "^1.5.1",
+    "wavecanvas": "^1.1.1",
+    "web-worker": "^1.1.0"
+  },
+  "homepage": "https://github.com/tilk/digitaljs",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/tilk/digitaljs.git"
+  },
+  "jest": {
+    "testEnvironment": "jest-environment-node",
+    "verbose": true,
+    "transform": {
+      "^.+\\.m?jsx?$": "babel-jest"
+    },
+    "moduleDirectories": [
+      "node_modules",
+      "src"
+    ],
+    "moduleFileExtensions": [
+      "js",
+      "mjs"
+    ],
+    "testMatch": [
+      "**/*.test.mjs"
+    ]
+  }
+}
