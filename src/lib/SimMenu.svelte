@@ -20,6 +20,7 @@
         circuitStore,
         resetCircuitStore,
         saveCircuit,
+		downloadCiruit,
     } from './circuitStore'
     import { CustomHeadlessCircuit } from './CustomHeadlessCircuit'
 
@@ -131,6 +132,14 @@
             width={40}
         />
     </button>
+
+	<button onclick={() => downloadCiruit()}>
+		SaveToPC
+		<!-- This should be an Icon-->
+	</button>
+
+
+
 </div>
 
 <style>

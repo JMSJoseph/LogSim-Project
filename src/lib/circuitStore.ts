@@ -129,6 +129,7 @@ function saveCircuitStoreToLS() {
     localStorage.setItem('circuitStoreSave', JSON.stringify(get(circuitStore)))
 }
 
+
 export function clickSvelvetSave() {
 
     const svelvetSaveButton = document.querySelector('.save-button')
@@ -171,3 +172,29 @@ type SvelvetConnections = Map<OutputAnchorId, SvelvetConnection>
 // I tried out a global solution below, maybe if I could get the links to be null after loading all of the nodes
 // Then set the links, it might trigger a re-render
 // export let savedConnections: Writable<SvelvetConnections | {default: }> = writable({})
+
+
+
+// I think the saveas button needs to be made spereralty but this might require a server i cant find any sources
+export function downloadCiruit(){
+	saveCircuit();
+	// => Turn the current Circuuit into a file ...
+	
+	const circuitBlob = new Blob([localStorage.getItem('circuitStoreSave')], {type: 'text/plain'});
+	const jsonObjectUrl = URL.createObjectURL(circuitBlob);
+	const defaultFilename = "Circuit.logicap";
+
+
+	// Creates the elemet to do the dowload
+	const anchorEl = document.createElement("a");
+	anchorEl.href = jsonObjectUrl;
+	anchorEl.download = defaultFilename;
+
+	// Trigger's the download
+	anchorEl.click();
+
+	// Clean up
+	URL.revokeObjectURL(jsonObjectUrl);
+
+
+}
